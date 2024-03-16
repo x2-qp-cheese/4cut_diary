@@ -20,7 +20,7 @@ class Loginpage extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20), // Add some space between the text and the button
+            SizedBox(height: 30), // Add some space between the text and the button
             CupertinoButton(
               child: Image.asset('assets/img/kakao_login_medium_wide.png'), // Change 'your_button_image.png' to your actual image path
               onPressed: () {
