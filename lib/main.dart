@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:project1/login.dart';
+import 'package:project1/userpage.dart';
 
 
 void main() {
@@ -11,8 +11,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
+      routes: {
+        '/':(context) => Loginpage(),
+        '/userpage': (context) => Userpage(), // Replace Userpage with your actual Userpage widget
+      },
       title: '4cut Diary',
-      home: Loginpage(),
+      initialRoute: '/',
     );
   }
 }

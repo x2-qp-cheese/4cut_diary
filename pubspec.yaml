@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   kakao_flutter_sdk_user: ^1.3.1
   flutter_dotenv: ^5.0.2
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -97,7 +98,9 @@ flutter:
     - assets/config/.env
     - assets/img/kakao_login_large_wide.png
     - assets/img/kakao_login_medium_wide.png
-  
+    - assets/img/tmp1.png
+    - assets/img/tmp2.jpg
+    - assets/img/tmp3.png
   
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
