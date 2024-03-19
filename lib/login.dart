@@ -24,7 +24,7 @@ class Loginpage extends StatelessWidget {
             CupertinoButton(
               child: Image.asset('assets/img/kakao_login_medium_wide.png'), // Change 'your_button_image.png' to your actual image path
               onPressed: () {
-                signwithKakao();
+                signwithKakao(context);
               },
             ),
           ],
@@ -34,7 +34,7 @@ class Loginpage extends StatelessWidget {
   }
 }
 
-void signwithKakao() async{
+void signwithKakao(BuildContext context) async{
   await dotenv.load(fileName: 'assets/config/.env');
   String? kakaologinkey = dotenv.env['KAKAOLOGIN'];
   KakaoSdk.init(nativeAppKey: kakaologinkey);
@@ -43,6 +43,7 @@ void signwithKakao() async{
     try {
         await UserApi.instance.loginWithKakaoTalk();
         print('카카오톡으로 로그인 성공');
+        Navigator.pushReplacementNamed(context, '/userpage');
     } catch (error) {
       print('카카오톡으로 로그인 실패 $error');
 
@@ -55,6 +56,7 @@ void signwithKakao() async{
       try {
           await UserApi.instance.loginWithKakaoAccount();
           print('카카오계정으로 로그인 성공');
+          Navigator.pushReplacementNamed(context, '/userpage');
       } catch (error) {
           print('카카오계정으로 로그인 실패 $error');
       }
@@ -63,6 +65,7 @@ void signwithKakao() async{
     try {
       await UserApi.instance.loginWithKakaoAccount();
       print('카카오계정으로 로그인 성공');
+      Navigator.pushReplacementNamed(context, '/userpage');
     } catch (error) {
       print('카카오계정으로 로그인 실패 $error');
     }

@@ -44,3 +44,8 @@ app.*.map.json
 
 #key
 *.env
+
+#personal photo
+tmp1.png
+tmp2.jpg
+tmp3.png
