@@ -35,7 +35,7 @@ class _UserpageState extends State<Userpage> {
             ),
           ),
           Positioned(
-            top: screenHeight * 0.68,
+            top: screenHeight * 0.695,
             left: screenWidth * 0.30,
             right: screenWidth * 0.30,
             child: _buildProgressBar(screenWidth),
@@ -52,7 +52,7 @@ class _UserpageState extends State<Userpage> {
         return _buildSlideItem(imagePath, screenWidth, screenHeight);
       }).toList(),
       options: CarouselOptions(
-        viewportFraction: 0.8, // 조정 필요
+        viewportFraction: 0.95, // 조정 필요
         aspectRatio: 0.8,
         autoPlay: true,
         enlargeCenterPage: true,
@@ -78,7 +78,7 @@ class _UserpageState extends State<Userpage> {
         margin: EdgeInsets.all(15),
         decoration: _buildDecoration(),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(30),
+          // borderRadius: BorderRadius.circular(30),
           child: Container(
             width: 250,
             color: Colors.white,
@@ -97,12 +97,12 @@ class _UserpageState extends State<Userpage> {
 
   BoxDecoration _buildDecoration() {
     return BoxDecoration(
-      borderRadius: BorderRadius.circular(30),
+      // borderRadius: BorderRadius.circular(30),
       boxShadow: [
         BoxShadow(
           color: Colors.grey.withOpacity(0.5),
-          spreadRadius: 5,
-          blurRadius: 7,
+          spreadRadius: 3,
+          blurRadius: 5,
           offset: Offset(0, 3),
         ),
       ],
@@ -138,10 +138,10 @@ class _UserpageState extends State<Userpage> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            border: Border.all(color: Colors.grey, width: 1),
-          ),
+          // decoration: BoxDecoration(
+          //   borderRadius: BorderRadius.circular(30),
+          //   border: Border.all(color: Colors.grey, width: 1),
+          // ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(30),
             child: TweenAnimationBuilder<double>(
@@ -151,7 +151,7 @@ class _UserpageState extends State<Userpage> {
               builder: (context, value, child) {
                 return SizedBox(
                   width: constraints.maxWidth * value,
-                  height: 7,
+                  height: 5,
                   child: LinearProgressIndicator(
                     value: value,
                     backgroundColor: Colors.grey,
