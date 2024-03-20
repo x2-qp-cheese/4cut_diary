@@ -4,6 +4,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 class Loginpage extends StatelessWidget {
+  const Loginpage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(

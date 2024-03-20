@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class Userpage extends StatefulWidget {
-  const Userpage({Key? key}) : super(key: key);
+  const Userpage({super.key});
+
   @override
   State<Userpage> createState() => _UserpageState();
 }
@@ -29,7 +30,7 @@ class _UserpageState extends State<Userpage> {
             top: screenHeight * 0.18, // 조정 필요
             left: 0,
             right: 0,
-            child: Container(
+            child: SizedBox(
               height: screenHeight * 0.5,
               child: _buildSlider(screenWidth, screenHeight),
             ),
@@ -45,7 +46,7 @@ class _UserpageState extends State<Userpage> {
     );
   }
 
-  //carouselslider
+  // Carousel Slider
   Widget _buildSlider(double screenWidth, double screenHeight) {
     return CarouselSlider(
       items: imagePaths.map((imagePath) {
@@ -66,38 +67,32 @@ class _UserpageState extends State<Userpage> {
     );
   }
 
-  
+  // Build Slide Item
   Widget _buildSlideItem(
       String imagePath, double screenWidth, double screenHeight) {
-    return GestureDetector(
-      //클릭을 하게 되면 해당 페이지에 해당하는 화면이 뜸
-      onTap: () {
-        // print("hello");
-      },
-      child: Container(
-        margin: EdgeInsets.all(15),
-        decoration: _buildDecoration(),
-        child: ClipRRect(
-          // borderRadius: BorderRadius.circular(30),
-          child: Container(
-            width: 250,
-            color: Colors.white,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildImage(imagePath, screenWidth, screenHeight),
-                _buildText(),
-              ],
-            ),
+    return Container(
+      margin: EdgeInsets.all(15),
+      decoration: _buildDecoration(),
+      child: ClipRRect(
+        child: Container(
+          width: 250,
+          color: Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 10),
+              _buildImage(imagePath, screenWidth, screenHeight),
+              _buildText(),
+            ],
           ),
         ),
       ),
     );
   }
 
+  // BoxDecoration
   BoxDecoration _buildDecoration() {
     return BoxDecoration(
-      // borderRadius: BorderRadius.circular(30),
       boxShadow: [
         BoxShadow(
           color: Colors.grey.withOpacity(0.5),
@@ -109,7 +104,7 @@ class _UserpageState extends State<Userpage> {
     );
   }
 
-//사진 크기 조정
+  // Build Image Widget
   Widget _buildImage(
       String imagePath, double screenWidth, double screenHeight) {
     return Image.asset(
@@ -119,7 +114,7 @@ class _UserpageState extends State<Userpage> {
     );
   }
 
-  //날짜 등 사진 정보
+  // Build Text Widget
   Widget _buildText() {
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
@@ -133,15 +128,11 @@ class _UserpageState extends State<Userpage> {
     );
   }
 
-  //
+  // Build Progress Bar Widget
   Widget _buildProgressBar(double screenWidth) {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Container(
-          // decoration: BoxDecoration(
-          //   borderRadius: BorderRadius.circular(30),
-          //   border: Border.all(color: Colors.grey, width: 1),
-          // ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(30),
             child: TweenAnimationBuilder<double>(
@@ -154,8 +145,9 @@ class _UserpageState extends State<Userpage> {
                   height: 5,
                   child: LinearProgressIndicator(
                     value: value,
-                    backgroundColor: Colors.grey,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                    backgroundColor: Colors.grey[200],
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        Color(0xFFFFBE98)), // 변경된 부분
                     borderRadius: BorderRadius.circular(30),
                   ),
                 );
