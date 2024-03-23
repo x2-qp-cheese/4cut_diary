@@ -27,11 +27,12 @@ class _UserpageState extends State<Userpage> {
       child: Stack(
         children: [
           Positioned(
-            top: screenHeight * 0.18, // 조정 필요
+            //slider의 위치 조정
+            top: screenHeight * 0.09,
             left: 0,
             right: 0,
             child: SizedBox(
-              height: screenHeight * 0.5,
+              height: screenHeight / 1.5,
               child: _buildSlider(screenWidth, screenHeight),
             ),
           ),
@@ -53,8 +54,9 @@ class _UserpageState extends State<Userpage> {
         return _buildSlideItem(imagePath, screenWidth, screenHeight);
       }).toList(),
       options: CarouselOptions(
-        viewportFraction: 0.95, // 조정 필요
-        aspectRatio: 0.8,
+        viewportFraction: 1.00,
+        //height가 정의가 된다면 aspect ratio는 필요 없음
+        height: screenHeight/2,
         autoPlay: true,
         enlargeCenterPage: true,
         initialPage: 0,
@@ -71,18 +73,20 @@ class _UserpageState extends State<Userpage> {
   Widget _buildSlideItem(
       String imagePath, double screenWidth, double screenHeight) {
     return Container(
-      margin: EdgeInsets.all(15),
       decoration: _buildDecoration(),
       child: ClipRRect(
         child: Container(
-          width: 250,
+          width: screenHeight / 3.2,
           color: Colors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 10),
               _buildImage(imagePath, screenWidth, screenHeight),
-              _buildText(),
+              Align(
+                alignment: Alignment.centerLeft,
+                child:_buildText(screenHeight),
+              )
+              
             ],
           ),
         ),
@@ -97,8 +101,8 @@ class _UserpageState extends State<Userpage> {
         BoxShadow(
           color: Colors.grey.withOpacity(0.5),
           spreadRadius: 3,
-          blurRadius: 5,
-          offset: Offset(0, 3),
+          blurRadius: 3,
+          offset: (Offset(0,3))
         ),
       ],
     );
@@ -109,24 +113,41 @@ class _UserpageState extends State<Userpage> {
       String imagePath, double screenWidth, double screenHeight) {
     return Image.asset(
       imagePath,
-      width: screenWidth / 2,
-      height: screenHeight / 3,
+      width: screenHeight/4,
     );
   }
 
   // Build Text Widget
-  Widget _buildText() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20.0),
-      child: Text(
-        '2022/04/03\nhello',
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+Widget _buildText(double screenHeight) {
+  return Padding(
+    padding: EdgeInsets.only(top: screenHeight / 60, left: screenHeight / 28),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start, // 텍스트를 왼쪽으로 정렬
+      children: [
+        Text(
+          //날짜 가져오기
+          '2022/04/03',
+          style: TextStyle(
+            fontSize: screenHeight / 50,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
         ),
-      ),
-    );
-  }
+        SizedBox(height: screenHeight/200),
+        Text(
+          //주소 가져오기
+          '가로수길',
+          style: TextStyle(
+            fontSize: screenHeight / 72,
+            fontWeight: FontWeight.bold,
+            color: Colors.black54,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
 
   // Build Progress Bar Widget
   Widget _buildProgressBar(double screenWidth) {
