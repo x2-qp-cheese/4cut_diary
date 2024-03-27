@@ -8,6 +8,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
@@ -17,6 +19,7 @@ class MyApp extends StatelessWidget {
       },
       title: '4cut Diary',
       initialRoute: '/',
+      debugShowCheckedModeBanner: false,
     );
   }
 }

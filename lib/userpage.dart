@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class Userpage extends StatefulWidget {
-  const Userpage({Key? key}) : super(key: key);
+  const Userpage({super.key});
+
   @override
   State<Userpage> createState() => _UserpageState();
 }
@@ -26,16 +27,17 @@ class _UserpageState extends State<Userpage> {
       child: Stack(
         children: [
           Positioned(
-            top: screenHeight * 0.18, // 조정 필요
+            //slider의 위치 조정
+            top: screenHeight * 0.09,
             left: 0,
             right: 0,
-            child: Container(
-              height: screenHeight * 0.5,
+            child: SizedBox(
+              height: screenHeight / 1.5,
               child: _buildSlider(screenWidth, screenHeight),
             ),
           ),
           Positioned(
-            top: screenHeight * 0.68,
+            top: screenHeight * 0.695,
             left: screenWidth * 0.30,
             right: screenWidth * 0.30,
             child: _buildProgressBar(screenWidth),
@@ -45,15 +47,16 @@ class _UserpageState extends State<Userpage> {
     );
   }
 
-  //carouselslider
+  // Carousel Slider
   Widget _buildSlider(double screenWidth, double screenHeight) {
     return CarouselSlider(
       items: imagePaths.map((imagePath) {
         return _buildSlideItem(imagePath, screenWidth, screenHeight);
       }).toList(),
       options: CarouselOptions(
-        viewportFraction: 0.8, // 조정 필요
-        aspectRatio: 0.8,
+        viewportFraction: 1.00,
+        //height가 정의가 된다면 aspect ratio는 필요 없음
+        height: screenHeight/2,
         autoPlay: true,
         enlargeCenterPage: true,
         initialPage: 0,
@@ -66,82 +69,91 @@ class _UserpageState extends State<Userpage> {
     );
   }
 
-  
+  // Build Slide Item
   Widget _buildSlideItem(
       String imagePath, double screenWidth, double screenHeight) {
-    return GestureDetector(
-      //클릭을 하게 되면 해당 페이지에 해당하는 화면이 뜸
-      onTap: () {
-        // print("hello");
-      },
-      child: Container(
-        margin: EdgeInsets.all(15),
-        decoration: _buildDecoration(),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(30),
-          child: Container(
-            width: 250,
-            color: Colors.white,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildImage(imagePath, screenWidth, screenHeight),
-                _buildText(),
-              ],
-            ),
+    return Container(
+      decoration: _buildDecoration(),
+      child: ClipRRect(
+        child: Container(
+          width: screenHeight / 3.2,
+          color: Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _buildImage(imagePath, screenWidth, screenHeight),
+              Align(
+                alignment: Alignment.centerLeft,
+                child:_buildText(screenHeight),
+              )
+              
+            ],
           ),
         ),
       ),
     );
   }
 
+  // BoxDecoration
   BoxDecoration _buildDecoration() {
     return BoxDecoration(
-      borderRadius: BorderRadius.circular(30),
       boxShadow: [
         BoxShadow(
           color: Colors.grey.withOpacity(0.5),
-          spreadRadius: 5,
-          blurRadius: 7,
-          offset: Offset(0, 3),
+          spreadRadius: 3,
+          blurRadius: 3,
+          offset: (Offset(0,3))
         ),
       ],
     );
   }
 
-//사진 크기 조정
+  // Build Image Widget
   Widget _buildImage(
       String imagePath, double screenWidth, double screenHeight) {
     return Image.asset(
       imagePath,
-      width: screenWidth / 2,
-      height: screenHeight / 3,
+      width: screenHeight/4,
     );
   }
 
-  //날짜 등 사진 정보
-  Widget _buildText() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20.0),
-      child: Text(
-        '2022/04/03\nhello',
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+  // Build Text Widget
+Widget _buildText(double screenHeight) {
+  return Padding(
+    padding: EdgeInsets.only(top: screenHeight / 60, left: screenHeight / 28),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start, // 텍스트를 왼쪽으로 정렬
+      children: [
+        Text(
+          //날짜 가져오기
+          '2022/04/03',
+          style: TextStyle(
+            fontSize: screenHeight / 50,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
         ),
-      ),
-    );
-  }
+        SizedBox(height: screenHeight/200),
+        Text(
+          //주소 가져오기
+          '가로수길',
+          style: TextStyle(
+            fontSize: screenHeight / 72,
+            fontWeight: FontWeight.bold,
+            color: Colors.black54,
+          ),
+        ),
+      ],
+    ),
+  );
+}
 
-  //
+
+  // Build Progress Bar Widget
   Widget _buildProgressBar(double screenWidth) {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            border: Border.all(color: Colors.grey, width: 1),
-          ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(30),
             child: TweenAnimationBuilder<double>(
@@ -151,11 +163,12 @@ class _UserpageState extends State<Userpage> {
               builder: (context, value, child) {
                 return SizedBox(
                   width: constraints.maxWidth * value,
-                  height: 7,
+                  height: 5,
                   child: LinearProgressIndicator(
                     value: value,
-                    backgroundColor: Colors.grey,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                    backgroundColor: Colors.grey[200],
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        Color(0xFFFFBE98)), // 변경된 부분
                     borderRadius: BorderRadius.circular(30),
                   ),
                 );
