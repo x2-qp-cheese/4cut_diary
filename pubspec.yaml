@@ -39,6 +39,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   carousel_slider: ^4.2.1
   flutter_screenutil: ^5.0.0
+  flutter_sfsymbols: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -93,6 +94,9 @@ flutter:
     - family: MainLogo
       fonts:
         - asset: assets/font/JustAnotherHand-Regular.ttf
+    - family: sficonsets
+      fonts:
+      - asset: packages/flutter_sfsymbols/fonts/sficonsets.ttf
     
 
   assets:
